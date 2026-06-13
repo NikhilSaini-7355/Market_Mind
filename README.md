@@ -33,3 +33,59 @@ go >= 1.21
 
 # Database
 PostgreSQL running locally or via a cloud provider
+```
+
+## Installation & Setup
+- Clone the Repository
+```bash
+git clone https://github.com/yourusername/Market-Mind.git
+cd Market-Mind
+```
+
+- Set Up the Python Environment (Agent Framework)
+Install the necessary dependencies for LangGraph, LangChain, and other Python utilities.
+
+1. Using UV
+```bash
+uv sync
+```
+
+2. Using pip
+```bash
+python -m venv .venv
+
+# Activate the virtual environment on Windows:
+.venv\Scripts\activate
+
+# Activate the virtual environment on macOS/Linux:
+source .venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
+- Set Up the Go Environment (Scraping Engine)
+Navigate to the Go module directory and install the concurrent scraping dependencies.
+```bash
+cd scraper
+go mod tidy
+cd ..
+```
+
+- Database Configuration
+Ensure your PostgreSQL instance is active. Run the necessary migration scripts to set up the schemas for the structured web data.
+```bash
+# Execute your initialization script (adjust path if necessary)
+psql -U your_postgres_user -d market_mind -f db/migrations/init.sql
+```
+
+- Environment Variables
+Create a .env file in the root directory to store your LLM API keys and database credentials.
+```bash
+# Create the .env file
+touch .env
+
+# Open .env in your text editor and add the following configurations:
+OPENAI_API_KEY=your_openai_api_key_here
+POSTGRES_URI=postgresql://user:password@localhost:5432/market_mind
+```
